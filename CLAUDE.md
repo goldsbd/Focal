@@ -20,7 +20,9 @@ address). `scripts/release.sh` makes the notarized DMG.
   Markdown page and RTF zoom. The plain wheel scrolls; ⌘-scroll / pinch / ⌘± zoom.
 - Text is editable; Markdown opens **rendered** (Preview | Edit, ⇧⌘P); RTF/RTFD edit with AppKit's format bar;
   File ▸ New Text File (⌥⌘N) saves under any extension (`notes.md` becomes Markdown). ⌘N stays New from Clipboard.
-- Video replaces QuickTime: hardware decode/HDR via AVPlayerView, passthrough trim (⌘T), loop, copy frame.
+- Video replaces QuickTime: hardware decode/HDR via AVPlayerView, passthrough trim (⌘T), loop, copy frame. The wheel over a
+  movie is AVPlayerView's own scrub (measured: 20 ms per wheel line or trackpad point, not frame-snapped); ← → step exact
+  frames.
 - **PDFs as Preview does them**: page panel (⌥⌘2; reorder by drag, ⌫ deletes, drop files to insert, Contents tab),
   toolbar search (⌘G steps), Markup bar with PDF tools (highlight/underline/strike on selected text, pen, shapes,
   text box, note, signature, redaction, page crop), form filling, rotate, Print, password PDFs stay encrypted on save.
@@ -139,7 +141,7 @@ matters**: Illustrator sits before "Image" (`.ai` conforms to `public.image` and
 
 `scripts/uitest.sh` launches **Focal Dev** through Launch Services (`open -n -W -a`), with `FOCAL_UITEST=<json>`.
 Steps run one after another, each with an optional `wait` in ms. Ops: `open action key(chars, code, mods) type click
-drag scroll scrollText resize markup tool color dump snap(which: window|settings|inspector|sheet) contextMenu
+drag scroll scrollText scrollVideo(dy, count, pixels) resize markup tool color dump snap(which: window|settings|inspector|sheet) contextMenu
 clipboard export js saveAs saveTo revert terminate quit`, and for PDFs (`UITestDriver+PDF`) `pdfDrag pdfClick` (page
 points, scrolled into view first) `search find goPage pages contents unlock endText setSignature sheetText`. `dump`
 writes the window state as JSON: frame, title, subtitle, edited, toast, Save enabled, toolbar, text, zoom, pages,

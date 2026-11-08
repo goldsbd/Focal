@@ -103,6 +103,14 @@ enum UITestDriver {
             guard let image, let window = image.view.window else { return }
             let at = image.canvas.convert(image.canvas.viewPoint(point(step["at"])), to: nil)
             scroll(dy: step["dy"] as? Double ?? 1, at: at, in: window)
+        case "scrollVideo":
+            // The wheel over a movie (AVPlayerView's own handling): "pixels" sends trackpad-style precise deltas.
+            guard let video = wc?.content as? VideoViewController, let window = video.view.window else { return }
+            if step["pause"] as? Bool ?? true { video.pausePlayback() }
+            let center = video.view.convert(NSPoint(x: video.view.bounds.midX, y: video.view.bounds.midY), to: nil)
+            for _ in 0..<(step["count"] as? Int ?? 1) {
+                scroll(dy: step["dy"] as? Double ?? 1, at: center, in: window, units: step["pixels"] as? Bool ?? false ? .pixel : .line)
+            }
         case "scrollText":
             // ⌘ + wheel over a text window (zoom), or a plain wheel (scroll) when "command" is false.
             guard let text = wc?.content as? TextViewController, let window = text.view.window else { return }
@@ -250,8 +258,8 @@ enum UITestDriver {
     }
 
     /// A line-based (mouse wheel) scroll event at a window location.
-    private static func scroll(dy: Double, at location: NSPoint, in window: NSWindow, command: Bool = false) {
-        guard let cg = CGEvent(scrollWheelEvent2Source: nil, units: .line, wheelCount: 1, wheel1: Int32(dy), wheel2: 0, wheel3: 0) else { return }
+    private static func scroll(dy: Double, at location: NSPoint, in window: NSWindow, command: Bool = false, units: CGScrollEventUnit = .line) {
+        guard let cg = CGEvent(scrollWheelEvent2Source: nil, units: units, wheelCount: 1, wheel1: Int32(dy), wheel2: 0, wheel3: 0) else { return }
         if command { cg.flags = .maskCommand }
         let screen = window.convertPoint(toScreen: location)
         let mainHeight = NSScreen.screens.first?.frame.height ?? 0
@@ -306,6 +314,10 @@ enum UITestDriver {
                 d["modelTriangles"] = s.triangles
                 d["modelSize"] = [s.size.x, s.size.y, s.size.z].map(Double.init)
                 d["modelTempFiles"] = model.document.temporaryFiles.count
+            }
+            if let video = wc.content as? VideoViewController {
+                d["videoTime"] = video.playbackTime ?? -1
+                d["videoRate"] = Double(video.playbackRate)
             }
             if let image, image.document.pageCount > 1 {
                 d["page"] = image.document.page

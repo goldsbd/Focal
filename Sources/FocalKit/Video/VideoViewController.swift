@@ -57,6 +57,11 @@ final class VideoViewController: NSViewController, ViewerContent, NSMenuItemVali
 
     var keyView: NSView? { playerView }
 
+    /// For the UI test driver: where the movie is, how fast it plays, and a way to stop it.
+    var playbackTime: Double? { player?.currentItem?.currentTime().seconds }
+    var playbackRate: Float { player?.rate ?? 0 }
+    func pausePlayback() { player?.pause() }
+
     private func showSize() {
         guard sizeIsReal, let naturalSize else { return }
         view.window?.subtitle = "\(Int(naturalSize.width)) × \(Int(naturalSize.height))"
