@@ -1,0 +1,3 @@
+import FocalKit
+
+FocalApp.run()

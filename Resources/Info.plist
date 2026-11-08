@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>Focal</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIdentifier</key>
+	<string>ai.digitalzoo.focal</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Focal</string>
+	<key>CFBundleDisplayName</key>
+	<string>Focal</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>27.0</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.photography</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>Image and video viewer that opens where you are looking.</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<!-- Writable image formats first: Editor role gives Save / Save As in these formats. -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>PNG image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>public.png</string></array>
+			<key>NSDocumentClass</key>
+			<string>ImageDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>JPEG image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>public.jpeg</string></array>
+			<key>NSDocumentClass</key>
+			<string>ImageDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>HEIC image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>public.heic</string></array>
+			<key>NSDocumentClass</key>
+			<string>ImageDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>TIFF image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>public.tiff</string></array>
+			<key>NSDocumentClass</key>
+			<string>ImageDocument</string>
+		</dict>
+		<!-- Also saved in place, as Preview does (SGI through Focal's own encoder; icons must be a standard size). -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>BMP image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>com.microsoft.bmp</string></array>
+			<key>NSDocumentClass</key>
+			<string>ImageDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>GIF image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>com.compuserve.gif</string></array>
+			<key>NSDocumentClass</key>
+			<string>ImageDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>TGA image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>com.truevision.tga-image</string></array>
+			<key>NSDocumentClass</key>
+			<string>ImageDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>SGI image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>com.sgi.sgi-image</string></array>
+			<key>NSDocumentClass</key>
+			<string>ImageDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Apple icon</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>com.apple.icns</string></array>
+			<key>NSDocumentClass</key>
+			<string>ImageDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>JPEG 2000 image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>public.jpeg-2000</string></array>
+			<key>NSDocumentClass</key>
+			<string>ImageDocument</string>
+		</dict>
+		<!-- PDF: view, search, mark up, sign, fill forms, reorder pages, save in place. -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>PDF document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>com.adobe.pdf</string></array>
+			<key>NSDocumentClass</key>
+			<string>PDFFileDocument</string>
+		</dict>
+		<!-- Illustrator files show their PDF content, read-only (saving through PDFKit would drop the Illustrator
+		     data). Before "Image": .ai conforms to public.image and would otherwise open as a flat picture. -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Illustrator document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>com.adobe.illustrator.ai-image</string></array>
+			<key>NSDocumentClass</key>
+			<string>PDFFileDocument</string>
+		</dict>
+		<!-- Every other image (GIF, WebP, AVIF, RAW, PSD, SVG...): view, mark up, save as one of the above. -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>public.image</string></array>
+			<key>NSDocumentClass</key>
+			<string>ImageDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Markdown</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>net.daringfireball.markdown</string></array>
+			<key>NSDocumentClass</key>
+			<string>TextDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Rich text</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>public.rtf</string><string>com.apple.rtfd</string><string>com.apple.flat-rtfd</string></array>
+			<key>NSDocumentClass</key>
+			<string>TextDocument</string>
+		</dict>
+		<!-- 3D models (SceneKit; glTF through macOS's USD tools; MaterialX on a sphere). Before Plain text: a .usda
+		     is a text file too, and should open as a model. OpenVDB is left out: no public framework draws volumes. -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>3D model</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>com.pixar.universal-scene-description</string><string>com.pixar.universal-scene-description-mobile</string><string>com.pixar.universal-scene-description-utf8</string><string>com.pixar.universal-scene-description-binary</string><string>org.khronos.gltf</string><string>org.khronos.glb</string><string>io.aswf.materialx</string><string>public.alembic</string><string>public.standard-tesselated-geometry-format</string><string>public.geometry-definition-format</string><string>public.polygon-file-format</string></array>
+			<key>NSDocumentClass</key>
+			<string>ModelDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Plain text</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>public.plain-text</string></array>
+			<key>NSDocumentClass</key>
+			<string>TextDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Movie</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array><string>public.movie</string></array>
+			<key>NSDocumentClass</key>
+			<string>VideoDocument</string>
+		</dict>
+		<!-- A folder dropped on the Dock icon or picked in Open browses its files in one window (handled in
+		     FocalDocumentController before any document is made). Rank None: never the default for folders. -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Folder</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>None</string>
+			<key>LSItemContentTypes</key>
+			<array><string>public.folder</string></array>
+		</dict>
+	</array>
+</dict>
+</plist>
