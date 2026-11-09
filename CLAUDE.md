@@ -45,6 +45,7 @@ scripts/install.sh                   # release build → ~/Applications/Focal.ap
 CONFIG=debug scripts/build-app.sh    # "Focal Dev.app" (bundle id ai.digitalzoo.focal.dev) for UI tests
 scripts/uitest.sh steps.json [log]   # drive Focal Dev through a JSON script (see below)
 FOCAL_LOG=1                          # env var: timing log to stderr ("window shown", "open … completed in N ms")
+FOCAL_APPEARANCE=dark                # env var, debug builds: Focal Dev runs dark without changing the system's setting (`open --env`, at launch)
 swift scripts/launch-bench.swift APP FILE OWNER   # launch-to-window time measured from the window server
 ```
 
@@ -148,6 +149,7 @@ writes the window state as JSON: frame, title, subtitle, edited, toast, Save ena
 annotations, PDF pages with their marks, 3D stats…
 
 - A binary started from the terminal is never made active; always launch via `open`.
+- Focal Dev's process is also named `Focal`: find it by path (`ps -axo pid=,comm=`), since `pgrep -x "Focal Dev"` matches nothing.
 - The app never runs `screencapture` (it raised a Screen Recording prompt on the user's screen). `snap` hands the
   window id to the shell script, which takes the screenshot.
 - The save panel runs **out of process**: `NSSavePanel.ok(_:)` throws "not implemented" and crashed a run (the user

@@ -8,6 +8,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillFinishLaunching(_ notification: Notification) {
         Prefs.registerDefaults()
+        #if DEBUG
+        // UI runs in dark mode without touching the system's setting (FOCAL_APPEARANCE=dark).
+        if ProcessInfo.processInfo.environment["FOCAL_APPEARANCE"] == "dark" { NSApp.appearance = NSAppearance(named: .darkAqua) }
+        #endif
         NSApp.mainMenu = MainMenu.build()
         Log.event("will finish launching")
     }
