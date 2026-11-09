@@ -42,3 +42,11 @@ import Testing
     #expect(TextFormat(typeName: "com.apple.rtfd", url: nil) == .rich)
     #expect(TextFormat(typeName: "public.plain-text", url: nil) == .plain)
 }
+
+/// WebKit paints a page's first frames on an opaque white base, before the page's CSS applies: in dark mode a Markdown
+/// window flashed white for up to two frames on 24 of 25 opens. With the base off, 0 of 25. If this fails on a new macOS,
+/// WebKit has dropped the setting (`MarkdownPreview` logs it and the flash is back).
+@MainActor @Test func markdownWebViewHasNoWhiteBase() {
+    let page = MarkdownPreview()
+    #expect(page.webView.value(forKey: "drawsBackground") as? Bool == false)
+}

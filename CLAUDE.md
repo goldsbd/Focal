@@ -93,6 +93,9 @@ matters**: Illustrator sits before "Image" (`.ai` conforms to `public.image` and
   `loadHTMLString` grants no file access, so relative images came up blank. Only clicked links navigate
   (no meta-refresh); `#anchor` links scroll in-page; local viewable files open in Focal. Pages are deleted on
   window close and at quit.
+- **Markdown pages have WebKit's white base off** (`drawsBackground` through KVC, guarded: macOS has no public API). The
+  first frames of a page are composited on opaque white before its CSS applies, so in dark mode 24 of 25 opens flashed
+  white. Revealing the view later doesn't help (at `didFinish` 23 of 25, after a snapshot 21 of 25); with the base off, 0.
 - **Rich text** zooms by `NSScrollView` magnification (text size ÷ 12 pt), never by rewriting the document's fonts,
   and sets the text view width by hand under magnification. Typing attributes start from the first character
   (else typing at the start came out Helvetica 12). ⌘B/⌘I/⌘U/⌘T are handled in `ZoomableTextView.performKeyEquivalent`:

@@ -33,7 +33,15 @@ final class MarkdownPreview: NSView, WKNavigationDelegate, @preconcurrency NSTex
         webView = ZoomableWebView(frame: .zero, configuration: config)
         super.init(frame: .zero)
         webView.navigationDelegate = self
-        webView.underPageBackgroundColor = .textBackgroundColor   // no white flash in dark mode while loading
+        webView.underPageBackgroundColor = .textBackgroundColor   // what shows behind the page while it loads
+        // WebKit composites a page's first frames on an opaque white base, before the page's CSS applies: in dark mode a
+        // window flashed white for up to two frames on 24 of 25 opens. Showing the view later (at didFinish, after a
+        // snapshot) still flashed 21-23 of 25; with the base off, 0 of 25. No public API on macOS, and KVC throws on a missing key.
+        if webView.responds(to: NSSelectorFromString("_setDrawsBackground:")) {
+            webView.setValue(false, forKey: "drawsBackground")
+        } else {
+            Log.event("WKWebView no longer has drawsBackground; Markdown pages may flash white while loading")
+        }
         addSubview(webView)
         finder.client = webView
         finder.findBarContainer = self
