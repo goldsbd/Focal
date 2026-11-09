@@ -3,8 +3,8 @@
 Native macOS replacement for **Preview (images, PDFs, 3D), QuickTime Player and a text viewer/editor**, built for one user on a 40"
 ultrawide. Swift 6.4 (strict concurrency) + AppKit, SwiftUI only for Settings. SwiftPM; no Xcode project.
 Bundle id `ai.digitalzoo.focal`, installed at `/Applications/Focal.app` (from the DMG). Targets **macOS 27+ on Apple silicon only**:
-the one setup we can test (no Intel Mac, no older macOS), so don't lower it untested. GitHub `goldsbd/Focal`, private
-until the user says otherwise; its history must never carry the user's personal email (commit as the GitHub no-reply
+the one setup we can test (no Intel Mac, no older macOS), so don't lower it untested. GitHub `goldsbd/Focal`, public
+since 2026-11-09; its history must never carry the user's personal email (commit as the GitHub no-reply
 address). `scripts/release.sh` makes the notarized DMG.
 
 ## Non-negotiable behaviour (the user asked for each of these)
@@ -50,7 +50,13 @@ swift scripts/launch-bench.swift APP FILE OWNER   # launch-to-window time measur
 ```
 
 Builds land in `build.noindex/` so Spotlight never lists a second "Focal". Install only after tests and a UI run
-pass; `install.sh` unregisters the build copy so only `~/Applications/Focal.app` appears in Open With.
+pass; `install.sh` unregisters the build copy so only the installed app appears in Open With. Keep one installed copy:
+a DMG install lands in `/Applications`, and a mounted DMG lists too until it's ejected.
+
+**Releasing** (a push alone doesn't reach anyone who downloads the app): edit `CFBundleShortVersionString` in
+`Resources/Info.plist` by hand (PlistBuddy rewrites the whole file), test, commit and push, run `scripts/release.sh`, tag that
+commit, `gh release create vX.Y.Z build.noindex/release/Focal-X.Y.Z.dmg --verify-tag --latest`, then download the asset
+back and check its SHA-256 and `xcrun stapler validate`.
 
 ## Layout
 
@@ -153,6 +159,9 @@ annotations, PDF pages with their marks, 3D stats…
 
 - A binary started from the terminal is never made active; always launch via `open`.
 - Focal Dev's process is also named `Focal`: find it by path (`ps -axo pid=,comm=`), since `pgrep -x "Focal Dev"` matches nothing.
+- Dark-only or sub-frame glitches: launch with `open -g -n -a "$DEV_APP" --env FOCAL_APPEARANCE=dark file`, then open further
+  files with plain `open -g -a`, and count composited frames with ScreenCaptureKit filtered to that app at 120 fps. `-g` keeps
+  focus where it is (the JSON driver calls `NSApp.activate`). Screenshots miss a 25 ms frame, and a white flash only shows on a dark page.
 - The app never runs `screencapture` (it raised a Screen Recording prompt on the user's screen). `snap` hands the
   window id to the shell script, which takes the screenshot.
 - The save panel runs **out of process**: `NSSavePanel.ok(_:)` throws "not implemented" and crashed a run (the user
@@ -172,10 +181,11 @@ annotations, PDF pages with their marks, 3D stats…
   dropped (`sidebarClick` logs `key=`/`active=`). Repeat rather than conclude. **Keys need focus too; `action` doesn't**
   (it walks the window's responder chain), so prefer `action` for menu commands. Key `mods` are `command`,
   `shift`, `option`, `control` (not `cmd`).
-- The user may have the installed Focal open: check before installing (`install.sh` now quits it gracefully).
+- The user may have the installed Focal open: check before installing (`install.sh` now quits it gracefully), by path, and they may install from the DMG themselves.
 
 ## Known gaps
 
+- The Settings window opens with its left edge at the screen centre (seen in footage 2026-11-08, not investigated).
 - MKV/WebM don't play (AVFoundation); a libmpv fallback was offered, not requested.
 - A click on a background window's sidebar (first-mouse) is set up but can't be proven with synthetic events.
 - Not yet exercised by a person or the harness: physical trackpad pinch, typing a name into the real Save panel,
