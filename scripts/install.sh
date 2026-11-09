@@ -3,7 +3,9 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 scripts/build-app.sh
+# Replace the copy that's already installed, wherever it is (a DMG install lands in /Applications): a second copy lists twice in Open With.
 DEST="$HOME/Applications/Focal.app"
+[ -d /Applications/Focal.app ] && DEST=/Applications/Focal.app
 LSREG=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister
 mkdir -p "$HOME/Applications"
 # Quit a running Focal the way a person would, so unsaved changes get their usual prompt. Never kill it:

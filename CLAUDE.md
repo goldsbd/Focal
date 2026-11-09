@@ -2,7 +2,7 @@
 
 Native macOS replacement for **Preview (images, PDFs, 3D), QuickTime Player and a text viewer/editor**, built for one user on a 40"
 ultrawide. Swift 6.4 (strict concurrency) + AppKit, SwiftUI only for Settings. SwiftPM; no Xcode project.
-Bundle id `ai.digitalzoo.focal`, installed at `~/Applications/Focal.app`. Targets **macOS 27+ on Apple silicon only**:
+Bundle id `ai.digitalzoo.focal`, installed at `/Applications/Focal.app` (from the DMG). Targets **macOS 27+ on Apple silicon only**:
 the one setup we can test (no Intel Mac, no older macOS), so don't lower it untested. GitHub `goldsbd/Focal`, private
 until the user says otherwise; its history must never carry the user's personal email (commit as the GitHub no-reply
 address). `scripts/release.sh` makes the notarized DMG.
@@ -41,7 +41,7 @@ address). `scripts/release.sh` makes the notarized DMG.
 ```bash
 swift build                          # compile check
 swift test                           # unit tests (Swift Testing), ~60 tests, <1 s
-scripts/install.sh                   # release build → ~/Applications/Focal.app (quits a running Focal gracefully; stops if it won't)
+scripts/install.sh                   # release build, ad-hoc signed, replaces the installed copy in /Applications (else ~/Applications); quits a running Focal gracefully, stops if it won't
 CONFIG=debug scripts/build-app.sh    # "Focal Dev.app" (bundle id ai.digitalzoo.focal.dev) for UI tests
 scripts/uitest.sh steps.json [log]   # drive Focal Dev through a JSON script (see below)
 FOCAL_LOG=1                          # env var: timing log to stderr ("window shown", "open … completed in N ms")
